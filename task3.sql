@@ -6,9 +6,9 @@ SELECT a.area_id, a.area_name,
                    WHEN compensation_from IS NOT NULL AND compensation_to IS NOT NULL
                        THEN (compensation_from + compensation_to) / 2.0
                    WHEN compensation_from IS NOT NULL
-                       THEN  compensation_to
-                   WHEN compensation_from IS NOT NULL
-                       THEN  compensation_to
+                       THEN compensation_from
+                   WHEN compensation_to IS NOT NULL
+                       THEN compensation_to
                    ELSE 0
                    END
        ) as avg_compensation_from_to

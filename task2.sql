@@ -158,10 +158,9 @@ FROM test_data
 SELECT v.vacancy_id,
        r.resume_id,
        md5(random()::text),
-       v.created_at + (random() * interval '60 days')
+       GREATEST(v.created_at, r.created_at) + (random() * interval '60 days')
 FROM vacancy v
 JOIN resume r ON v.profession_id=r.profession_id
 JOIN employee e ON e.employee_id=r.employee_id
 WHERE random()< 0.15
 AND v.area_id = e.area_id
-AND v.created_at >= r.created_at
